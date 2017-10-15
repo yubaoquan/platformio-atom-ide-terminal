@@ -75,7 +75,7 @@ class PlatformIOTerminalView extends View
           lines = rawLines.map (line) ->
             line.replace(/\s/g, " ").trimRight()
           text = lines.join("\n")
-          atom.clipboard.write(text) 
+          atom.clipboard.write(text)
         unless text
           @focus()
     @xterm.on 'dragenter', override
@@ -441,6 +441,9 @@ class PlatformIOTerminalView extends View
 
   paste: ->
     @input atom.clipboard.read()
+  clear: ->
+    @terminal.destroy()
+    @displayTerminal()
 
   insertSelection: (customText) ->
     return unless editor = atom.workspace.getActiveTextEditor()
